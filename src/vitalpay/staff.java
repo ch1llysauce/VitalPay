@@ -28,7 +28,7 @@ public class staff {
         logoutButton.setBounds(50, 160, 150, 30);
         frame.add(logoutButton);
 
-        // Info panel
+        // pede makita rito un and ut
         JPanel infoPanel = new JPanel();
         infoPanel.setBackground(new Color(112, 128, 144));
         infoPanel.setBounds(250, 80, 300, 150);
@@ -47,7 +47,7 @@ public class staff {
         usernameValue.setBounds(120, 20, 100, 20);
         infoPanel.add(usernameValue);
 
-        // system ito para sa staff kaya staff lalagay natin
+        // registered as staff
         JLabel userTypeLabel = new JLabel("UserType");
         userTypeLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         userTypeLabel.setForeground(Color.WHITE);
