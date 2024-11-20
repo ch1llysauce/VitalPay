@@ -15,7 +15,7 @@ public class StaffRegistration extends JFrame implements ActionListener {
 
     public StaffRegistration() {
         setTitle("Vital Pay");
-        setSize(500, 400); // Adjusted for better spacing
+        setSize(500, 400); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
