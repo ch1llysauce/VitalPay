@@ -22,6 +22,7 @@ public class AddPatient extends JFrame implements ActionListener {
         setSize(600, 500);
         setLayout(null);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         //Initialize and add components
         initializeComponents();
@@ -139,7 +140,7 @@ public class AddPatient extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {
             this.setVisible(false);
-            new VitalPay().setVisible(true);
+            new VitalPayAdmin().setVisible(true);
         }
     }
 

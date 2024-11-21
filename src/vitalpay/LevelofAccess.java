@@ -71,15 +71,16 @@ public class LevelofAccess extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        VitalPay adm = new VitalPay();
-                
+         
         if (e.getSource() == admin) {
             this.setVisible(false);
+            VitalPayAdmin adm = new VitalPayAdmin();
             adm.setVisible(true);
             
         } else if (e.getSource() == staff) {
-            JOptionPane.showMessageDialog(this, "Staff Access Selected", "Access Level", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            VitalPayStaff stf = new VitalPayStaff();
+            stf.setVisible(true);
         }
     }
 }

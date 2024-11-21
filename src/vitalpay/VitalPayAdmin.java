@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VitalPay extends JFrame implements ActionListener {
+public class VitalPayAdmin extends JFrame implements ActionListener {
 
     // Declare instance variables for buttons
     private JButton searchBtn;
@@ -14,13 +14,14 @@ public class VitalPay extends JFrame implements ActionListener {
     private JButton addPatientBtn;
     private JButton logoutBtn;
     
-    public VitalPay() {
+    public VitalPayAdmin() {
         // Frame settings
         setTitle("VitalPay");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLayout(null);
         setLocationRelativeTo(null); // Center the window on the screen
+        setResizable(false);
 
         // Initialize and add components
         add(createGradientLabel());
@@ -68,6 +69,8 @@ public class VitalPay extends JFrame implements ActionListener {
 
         // Action listeners
         registerBtn.addActionListener(this);
+        addPatientBtn.addActionListener(this);
+        logoutBtn.addActionListener(this);
 
         // Add buttons to panel
         btnPanel.add(searchBtn);
@@ -81,12 +84,23 @@ public class VitalPay extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        StaffRegistration staffreg = new StaffRegistration();
-        
+  
         if (e.getSource() == registerBtn) {
+            StaffRegistration staffreg = new StaffRegistration();
             this.setVisible(false);
             staffreg.setVisible(true);
+        }
+        
+        else if(e.getSource() == addPatientBtn){
+            AddPatient addpatient = new AddPatient();
+            this.setVisible(false);
+            addpatient.setVisible(true);
+        }
+        
+        else if(e.getSource() == logoutBtn){
+            LevelofAccess loa = new LevelofAccess();
+            this.setVisible(false);
+            loa.setVisible(true);
         }
     }
 
@@ -135,6 +149,6 @@ public class VitalPay extends JFrame implements ActionListener {
 
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(VitalPay::new);
+        SwingUtilities.invokeLater(VitalPayAdmin::new);
     }
 }
