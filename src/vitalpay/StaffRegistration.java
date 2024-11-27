@@ -72,7 +72,7 @@ public class StaffRegistration extends JFrame {
 
         add(inputPanel, BorderLayout.CENTER);
 
-        // Save Button Panel
+        // Save Detail Button Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
