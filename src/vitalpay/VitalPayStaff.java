@@ -10,8 +10,11 @@ public class VitalPayStaff extends JFrame implements ActionListener {
     private JButton patientButton;
     private JButton archiveButton;
     private JButton logoutButton;
+    private Staff staff;
        
-    public VitalPayStaff(){
+    public VitalPayStaff(Staff staff){
+        this.staff = staff;
+        
         // Frame ng mismong system siyempre
         setTitle("VitalPay");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,20 +60,20 @@ public class VitalPayStaff extends JFrame implements ActionListener {
         usernameLabel.setBounds(20, 20, 80, 20);
         infoPanel.add(usernameLabel);
 
-        JLabel usernameValue = new JLabel("Weni<3");
+        JLabel usernameValue = new JLabel(staff.getUsername());
         usernameValue.setFont(new Font("Arial", Font.BOLD, 14));
         usernameValue.setForeground(Color.RED);
         usernameValue.setBounds(120, 20, 100, 20);
         infoPanel.add(usernameValue);
 
         // registered as staff
-        JLabel userTypeLabel = new JLabel("UserType");
+        JLabel userTypeLabel = new JLabel("UserType: ");
         userTypeLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         userTypeLabel.setForeground(Color.WHITE);
         userTypeLabel.setBounds(20, 60, 80, 20);
         infoPanel.add(userTypeLabel);
 
-        JLabel userTypeValue = new JLabel("Staff");
+        JLabel userTypeValue = new JLabel(staff.getRole());
         userTypeValue.setFont(new Font("Arial", Font.BOLD, 14));
         userTypeValue.setForeground(Color.RED);
         userTypeValue.setBounds(120, 60, 100, 20);
@@ -93,16 +96,9 @@ public class VitalPayStaff extends JFrame implements ActionListener {
         
         if(e.getSource() == logoutButton){
             this.setVisible(false);
-            LevelofAccess loa = new LevelofAccess();
-            loa.setVisible(true);
+            VitalPayLogin login = new VitalPayLogin();
+            login.setVisible(true);
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            VitalPayStaff staffFrame = new VitalPayStaff();
-            staffFrame.setVisible(true);
-        });
     }
      
 }

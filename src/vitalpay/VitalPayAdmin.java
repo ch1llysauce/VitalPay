@@ -20,7 +20,7 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLayout(null);
-        setLocationRelativeTo(null); // Center the window on the screen
+        setLocationRelativeTo(null);
         setResizable(false);
 
         // Initialize and add components
@@ -98,9 +98,9 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
         }
         
         else if(e.getSource() == logoutBtn){
-            LevelofAccess loa = new LevelofAccess();
+            VitalPayLogin login = new VitalPayLogin();
             this.setVisible(false);
-            loa.setVisible(true);
+            login.setVisible(true);
         }
     }
 
