@@ -1,6 +1,7 @@
 package vitalpay;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class StaffRegistration extends JFrame {
@@ -10,10 +11,13 @@ public class StaffRegistration extends JFrame {
     private JTextField address;
     private JComboBox<String> role;
     private JButton savedetails;
+    private JButton backBtn;
+    private JTable staffTable;
+    private DefaultTableModel tableModel;
 
     public StaffRegistration() {
-        setTitle("Vital Pay");
-        setSize(500, 400);
+        setTitle("Vital Pay - Staff Registration");
+        setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -65,25 +69,52 @@ public class StaffRegistration extends JFrame {
 
         // Role
         inputPanel.add(new JLabel("Role:", SwingConstants.LEFT));
-        String[] roles = {"Nigga", "Nurse", "Doctor"};
+        String[] roles = {"Staff", "Nurse", "Doctor"};
         role = new JComboBox<>(roles);
         role.setPreferredSize(new Dimension(200, 30));
         inputPanel.add(role);
 
-        add(inputPanel, BorderLayout.CENTER);
+        add(inputPanel, BorderLayout.WEST);
 
-        // Save Detail Button Panel
+        // Table Panel (Right Side)
+        JPanel tablePanel = new JPanel();
+        tablePanel.setLayout(new BorderLayout());
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Table Setup
+        String[] columnNames = {"First Name", "Last Name", "Address", "Role"};
+        tableModel = new DefaultTableModel(columnNames, 0){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        staffTable = new JTable(tableModel);
+        JScrollPane tableScrollPane = new JScrollPane(staffTable);
+
+        tablePanel.add(tableScrollPane, BorderLayout.CENTER);
+
+        add(tablePanel, BorderLayout.CENTER);
+
+        // Save Button Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         savedetails = new JButton("Save Details");
         savedetails.setPreferredSize(new Dimension(150, 40));
-        savedetails.setAlignmentX(Component.CENTER_ALIGNMENT);
         savedetails.setFocusable(false);
+        
+        backBtn = new JButton("Back");
+        backBtn.setPreferredSize(new Dimension(150, 40));
+        backBtn.setFocusable(false);
+        
         buttonPanel.add(savedetails);
-
+        buttonPanel.add(backBtn);
+        
         add(buttonPanel, BorderLayout.SOUTH);
+
+        // Action Listener for Save Button
         savedetails.addActionListener(e -> {
             String firstName = firstname.getText().trim();
             String lastName = lastname.getText().trim();
@@ -91,27 +122,50 @@ public class StaffRegistration extends JFrame {
             String selectedRole = (String) role.getSelectedItem();
 
             if (!firstName.isEmpty() && !lastName.isEmpty() && !addressText.isEmpty()) {
-                String username = firstName.toLowerCase() + "." + lastName.toLowerCase();
-                String password = "password123"; // Default password
+                boolean isDuplicate = false;
 
-                if (StaffData.staffExists(username)) {
+                // Check for duplicate entry
+                for (int i = 0; i < tableModel.getRowCount(); i++) {
+                    String existingFirstName = tableModel.getValueAt(i, 0).toString();
+                    String existingLastName = tableModel.getValueAt(i, 1).toString();
+                    String existingAddress = tableModel.getValueAt(i, 2).toString();
+                    String existingRole = tableModel.getValueAt(i, 3).toString();
+
+                    if (firstName.equalsIgnoreCase(existingFirstName)
+                            && lastName.equalsIgnoreCase(existingLastName)
+                            && addressText.equalsIgnoreCase(existingAddress)
+                            && selectedRole.equalsIgnoreCase(existingRole)) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (isDuplicate) {
                     JOptionPane.showMessageDialog(this,
-                            "A staff member with this username already exists.\nPlease use a different name.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                            "Staff member is already registered.",
+                            "Duplicate Entry",
+                            JOptionPane.WARNING_MESSAGE);
                 } else {
-                    // Save staff details
-                    Staff newStaff = new Staff(username, password, selectedRole);
-                    StaffData.addStaff(username, password, selectedRole);
+                    // Add data to the table
+                    tableModel.addRow(new Object[]{firstName, lastName, addressText, selectedRole});
 
-                    JOptionPane.showMessageDialog(this,
-                            "Successfully Registered\nUsername: " + username + "\nPassword: " + password,
-                            "Staff Registration",
+                    // Confirmation Dialog
+                    int option = JOptionPane.showConfirmDialog(this,
+                            "Successfully Registered!\nDo you want to register another staff?",
+                            "Registration Successful",
+                            JOptionPane.YES_NO_OPTION,
                             JOptionPane.INFORMATION_MESSAGE);
 
-                    this.setVisible(false);
-                    VitalPayStaff staffFrame = new VitalPayStaff(newStaff);
-                    staffFrame.setVisible(true);
+                    if (option == JOptionPane.NO_OPTION) {
+                        this.setVisible(false);
+                        new VitalPayAdmin().setVisible(true);
+                    } else {
+                        // Clear fields for next registration
+                        firstname.setText("");
+                        lastname.setText("");
+                        address.setText("");
+                        role.setSelectedIndex(0);
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(this,
@@ -120,9 +174,19 @@ public class StaffRegistration extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         });
+        
+        // Action Listener for Back Button
+        backBtn.addActionListener(e -> {
+            if(e.getSource()==backBtn){
+                this.setVisible(false);
+                new VitalPayAdmin().setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new StaffRegistration().setVisible(true));
     }
 }
+
+
