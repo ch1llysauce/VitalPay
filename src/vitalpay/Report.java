@@ -32,7 +32,7 @@ public class Report extends JFrame implements ActionListener {
     private void initializeComponents() {
 
         JPanel report = new JPanel();
-        report.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // 4 rows, 2 columns
+        report.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         report.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         report.add(new JLabel("Type of Report"));

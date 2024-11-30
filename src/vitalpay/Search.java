@@ -32,7 +32,7 @@ public class Search extends JFrame implements ActionListener {
     private void initializeComponents() {
         
         JPanel ID = new JPanel();
-        ID.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // 4 rows, 2 columns
+        ID.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         ID.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         ID.add(new JLabel("Patient ID:"));
@@ -104,7 +104,7 @@ public class Search extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {
             this.setVisible(false);
-            new VitalPayAdmin().setVisible(true); // Replace with the actual class for "Back" navigation
+            new VitalPayAdmin().setVisible(true);
         } 
     }
 
