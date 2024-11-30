@@ -68,6 +68,7 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
         logoutBtn = createButton("Logout");
 
         // Action listeners
+        searchBtn.addActionListener(this);
         registerBtn.addActionListener(this);
         addPatientBtn.addActionListener(this);
         logoutBtn.addActionListener(this);
@@ -85,7 +86,13 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
   
-        if (e.getSource() == registerBtn) {
+        if(e.getSource() == searchBtn){
+            Search search = new Search();
+            this.setVisible(false);
+            search.setVisible(true);
+        }
+        
+        else if(e.getSource() == registerBtn) {
             StaffRegistration staffreg = new StaffRegistration();
             this.setVisible(false);
             staffreg.setVisible(true);
