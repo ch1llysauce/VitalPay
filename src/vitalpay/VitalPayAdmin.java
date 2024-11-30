@@ -70,6 +70,7 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
         // Action listeners
         searchBtn.addActionListener(this);
         registerBtn.addActionListener(this);
+        reportBtn.addActionListener(this);
         addPatientBtn.addActionListener(this);
         logoutBtn.addActionListener(this);
 
@@ -96,6 +97,12 @@ public class VitalPayAdmin extends JFrame implements ActionListener {
             StaffRegistration staffreg = new StaffRegistration();
             this.setVisible(false);
             staffreg.setVisible(true);
+        }
+        
+        else if(e.getSource() == reportBtn) {
+            Report report = new Report();
+            this.setVisible(false);
+            report.setVisible(true);
         }
         
         else if(e.getSource() == addPatientBtn){

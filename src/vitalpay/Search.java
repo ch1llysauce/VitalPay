@@ -32,7 +32,7 @@ public class Search extends JFrame implements ActionListener {
     private void initializeComponents() {
         
         JPanel ID = new JPanel();
-        ID.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10)); // 4 rows, 2 columns
+        ID.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // 4 rows, 2 columns
         ID.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         ID.add(new JLabel("Patient ID:"));
