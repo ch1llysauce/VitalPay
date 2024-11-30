@@ -85,7 +85,7 @@ public class Report extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {
             this.setVisible(false);
-            new VitalPayAdmin().setVisible(true); // Replace with the actual class for "Back" navigation
+            new VitalPayAdmin().setVisible(true);
         } else if (e.getSource() == generate) {
             String selectedReport = (String) reporttype.getSelectedItem();
             generateReport(selectedReport);
