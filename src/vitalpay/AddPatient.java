@@ -187,6 +187,33 @@ public class AddPatient extends JFrame implements ActionListener {
         wardTypeComboBox.setBounds(550, 430, 150, 25);
         wardTypeComboBox.setVisible(false);
         add(wardTypeComboBox);
+        
+        // Insurance Provider
+        JLabel insuranceLabel = new JLabel("Insurance Provider: ");
+        insuranceLabel.setBounds(400, 470, 150, 25); 
+        add(insuranceLabel);
+
+        JTextField insuranceField = new JTextField();
+        insuranceField.setBounds(550, 470, 200, 25);
+        add(insuranceField);
+        
+        //Company Name
+        JLabel companyNameLabel = new JLabel("Company Name: ");
+        companyNameLabel.setBounds(400, 510, 150, 25);
+        add(companyNameLabel);
+        
+        JTextField companyNameField = new JTextField();
+        companyNameField.setBounds(550, 510, 200,25);
+        add(companyNameField);
+        
+        //ID Card
+        JLabel idCardLabel = new JLabel("ID Card: ");
+        idCardLabel.setBounds(400, 550, 150, 25);
+        add(idCardLabel);
+        
+        JTextField idCardField = new JTextField();
+        idCardField.setBounds(550, 550, 200, 25);
+        add(idCardField);
     }
     // Button Panel (Next and Back)
     private JPanel createButtonPanel() {
